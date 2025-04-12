@@ -50,20 +50,6 @@ public class HomeController {
         return "contact";
     }
     
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("title", "Login - TravelLust");
-        model.addAttribute("activeTab", "login");
-        return "login";
-    }
-    
-    @GetMapping("/register")
-    public String register(Model model) {
-        model.addAttribute("title", "Register - TravelLust");
-        model.addAttribute("activeTab", "register");
-        return "register";
-    }
-    
     // Handler for destination details
     @GetMapping("/destination/{id}")
     public String destinationDetails(@PathVariable("id") String id, Model model) {

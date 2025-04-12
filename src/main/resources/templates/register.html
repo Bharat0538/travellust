@@ -38,21 +38,27 @@
                                     <p class="text-muted">Join TravelLust to book trips, save favorites, and get personalized recommendations</p>
                                 </div>
                                 
-                                <form action="#" method="post">
+                                <div th:if="${error}" class="alert alert-danger mb-3" th:text="${error}">
+                                </div>
+                                
+                                <form th:action="@{/register}" th:object="${signUpRequest}" method="post">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="firstName" class="form-label">First Name</label>
-                                            <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                            <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
+                                            <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="lastName" class="form-label">Last Name</label>
-                                            <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                            <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required>
+                                            <div class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
                                         </div>
                                     </div>
                                     
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email Address</label>
-                                        <input type="email" class="form-control" id="email" name="email" required>
+                                        <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                                        <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                                     </div>
                                     
                                     <div class="mb-3">
@@ -62,13 +68,9 @@
                                     
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="password" name="password" required>
-                                        <div class="form-text">Password must be at least 8 characters long and include a number and a special character.</div>
-                                    </div>
-                                    
-                                    <div class="mb-4">
-                                        <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                                        <input type="password" class="form-control" id="password" th:field="*{password}" required>
+                                        <div class="form-text">Password must be at least 6 characters long.</div>
+                                        <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                                     </div>
                                     
                                     <div class="mb-4">
@@ -87,17 +89,17 @@
                                     <div class="text-center mb-4">
                                         <p class="text-muted">Or sign up with</p>
                                         <div class="social-login">
-                                            <a href="#" class="btn btn-outline-primary me-2">
+                                            <a th:href="@{/oauth2/authorization/google}" class="btn btn-outline-primary me-2">
                                                 <i class="fab fa-google"></i> Google
                                             </a>
-                                            <a href="#" class="btn btn-outline-primary">
+                                            <a th:href="@{/oauth2/authorization/facebook}" class="btn btn-outline-primary">
                                                 <i class="fab fa-facebook-f"></i> Facebook
                                             </a>
                                         </div>
                                     </div>
                                     
                                     <div class="text-center">
-                                        <p>Already have an account? <a href="#" class="text-primary">Login</a></p>
+                                        <p>Already have an account? <a th:href="@{/login}" class="text-primary">Login</a></p>
                                     </div>
                                 </form>
                             </div>
