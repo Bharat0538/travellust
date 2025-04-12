@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Tour Packages - TravelLust</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- Header Section -->
+    <header th:replace="~{fragments/header :: header}"></header>
+    
+    <!-- Main Content -->
+    <main>
+        <section id="content">
+            <!-- Hero Section -->
+            <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Tour Packages</h1>
+                        <p>Choose from our carefully crafted travel packages for your dream vacation</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Packages Filter Section -->
+            <section class="section-padding">
+                <div class="container">
+                    <!-- Filter Options -->
+                    <div class="filter-tabs mb-5" data-aos="fade-up">
+                        <ul class="nav nav-pills justify-content-center mb-4">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">All Packages</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Family Tours</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Honeymoon</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Adventure</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Cultural</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Beach Holidays</a>
+                            </li>
+                        </ul>
+                        
+                        <div class="form-row d-flex">
+                            <div class="col-md-4 mb-3 me-3">
+                                <select class="form-select">
+                                    <option selected>Price: Low to High</option>
+                                    <option>Price: High to Low</option>
+                                    <option>Duration: Short to Long</option>
+                                    <option>Duration: Long to Short</option>
+                                    <option>Popularity</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <select class="form-select">
+                                    <option selected>All Durations</option>
+                                    <option>1-3 Days</option>
+                                    <option>4-6 Days</option>
+                                    <option>7-9 Days</option>
+                                    <option>10+ Days</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Packages List -->
+                    <div class="row">
+                        <!-- Package 1 -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                            <div class="package-card">
+                                <div class="package-img">
+                                    <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1449&q=80" alt="European Adventure">
+                                </div>
+                                <div class="package-content">
+                                    <h3>European Adventure</h3>
+                                    <div class="package-meta">
+                                        <span><i class="far fa-calendar-alt"></i> 10 Days</span>
+                                        <span><i class="fas fa-user-friends"></i> Max People: 12</span>
+                                    </div>
+                                    <p>Experience the best of Europe with visits to Paris, Rome, Barcelona, and Amsterdam.</p>
+                                    <div class="price mb-3">$2,499 <small>/per person</small></div>
+                                    <a th:href="@{/book-now/package/europe}" class="btn btn-primary mt-auto">Book Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Package 2 -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="package-card">
+                                <div class="package-img">
+                                    <img src="https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Tropical Paradise">
+                                </div>
+                                <div class="package-content">
+                                    <h3>Tropical Paradise</h3>
+                                    <div class="package-meta">
+                                        <span><i class="far fa-calendar-alt"></i> 7 Days</span>
+                                        <span><i class="fas fa-user-friends"></i> Max People: 10</span>
+                                    </div>
+                                    <p>Relax in Bali's pristine beaches, witness stunning sunsets, and explore lush jungles.</p>
+                                    <div class="price mb-3">$1,399 <small>/per person</small></div>
+                                    <a th:href="@{/book-now/package/bali}" class="btn btn-primary mt-auto">Book Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Package 3 -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="package-card">
+                                <div class="package-img">
+                                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="American Road Trip">
+                                </div>
+                                <div class="package-content">
+                                    <h3>American Road Trip</h3>
+                                    <div class="package-meta">
+                                        <span><i class="far fa-calendar-alt"></i> 14 Days</span>
+                                        <span><i class="fas fa-user-friends"></i> Max People: 8</span>
+                                    </div>
+                                    <p>Road trip across the USA, from the Grand Canyon to Yellowstone to New York City.</p>
+                                    <div class="price mb-3">$3,299 <small>/per person</small></div>
+                                    <a th:href="@{/book-now/package/usa}" class="btn btn-primary mt-auto">Book Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Package 4 -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                            <div class="package-card">
+                                <div class="package-img">
+                                    <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Japanese Culture Tour">
+                                </div>
+                                <div class="package-content">
+                                    <h3>Japanese Culture Tour</h3>
+                                    <div class="package-meta">
+                                        <span><i class="far fa-calendar-alt"></i> 9 Days</span>
+                                        <span><i class="fas fa-user-friends"></i> Max People: 10</span>
+                                    </div>
+                                    <p>Immerse yourself in Japanese culture with visits to Tokyo, Kyoto, and Osaka.</p>
+                                    <div class="price mb-3">$2,799 <small>/per person</small></div>
+                                    <a th:href="@{/book-now/package/japan}" class="btn btn-primary mt-auto">Book Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Package 5 -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="package-card">
+                                <div class="package-img">
+                                    <img src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=80" alt="Mediterranean Cruise">
+                                </div>
+                                <div class="package-content">
+                                    <h3>Mediterranean Cruise</h3>
+                                    <div class="package-meta">
+                                        <span><i class="far fa-calendar-alt"></i> 12 Days</span>
+                                        <span><i class="fas fa-user-friends"></i> Max People: 30</span>
+                                    </div>
+                                    <p>Cruise the Mediterranean Sea and visit Greece, Italy, Spain, and Croatia.</p>
+                                    <div class="price mb-3">$3,699 <small>/per person</small></div>
+                                    <a th:href="@{/book-now/package/mediterranean}" class="btn btn-primary mt-auto">Book Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Package 6 -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="package-card">
+                                <div class="package-img">
+                                    <img src="https://images.unsplash.com/photo-1575986767340-5d17ae767ab0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="Safari Adventure">
+                                </div>
+                                <div class="package-content">
+                                    <h3>African Safari Adventure</h3>
+                                    <div class="package-meta">
+                                        <span><i class="far fa-calendar-alt"></i> 8 Days</span>
+                                        <span><i class="fas fa-user-friends"></i> Max People: 8</span>
+                                    </div>
+                                    <p>Experience the wildlife of Africa on this thrilling safari through Kenya and Tanzania.</p>
+                                    <div class="price mb-3">$4,199 <small>/per person</small></div>
+                                    <a th:href="@{/book-now/package/safari}" class="btn btn-primary mt-auto">Book Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center mt-4" data-aos="fade-up">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+            
+            <!-- Special Offers Section -->
+            <section class="section-padding bg-light">
+                <div class="container">
+                    <div class="section-title" data-aos="fade-up">
+                        <h2>Special Offers</h2>
+                        <p>Take advantage of our limited-time offers and save on your next adventure</p>
+                    </div>
+                    
+                    <div class="row">
+                        <!-- Offer 1 -->
+                        <div class="col-lg-6" data-aos="fade-up">
+                            <div class="special-offer d-flex bg-white p-3 rounded shadow-sm mb-4">
+                                <div class="offer-image" style="width: 40%;">
+                                    <img src="https://images.unsplash.com/photo-1564417947365-8dbc9d0e732f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1073&q=80" alt="Early Bird Discount" class="img-fluid rounded">
+                                </div>
+                                <div class="offer-content ms-3" style="width: 60%;">
+                                    <h3 class="h4">Early Bird Discount</h3>
+                                    <p class="text-success fw-bold">Save up to 20%</p>
+                                    <p class="mb-2">Book any package 3 months in advance and get 20% off the regular price.</p>
+                                    <p class="text-muted small mb-3">Valid until December 31, 2023</p>
+                                    <a href="#" class="btn btn-sm btn-primary">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Offer 2 -->
+                        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="special-offer d-flex bg-white p-3 rounded shadow-sm mb-4">
+                                <div class="offer-image" style="width: 40%;">
+                                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80" alt="Group Discount" class="img-fluid rounded">
+                                </div>
+                                <div class="offer-content ms-3" style="width: 60%;">
+                                    <h3 class="h4">Group Discount</h3>
+                                    <p class="text-success fw-bold">Save up to 15%</p>
+                                    <p class="mb-2">Book for a group of 6 or more people and enjoy a 15% discount on any package.</p>
+                                    <p class="text-muted small mb-3">Valid for all bookings</p>
+                                    <a href="#" class="btn btn-sm btn-primary">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- FAQ Section -->
+            <section class="section-padding">
+                <div class="container">
+                    <div class="section-title" data-aos="fade-up">
+                        <h2>Frequently Asked Questions</h2>
+                        <p>Find answers to common questions about our tour packages</p>
+                    </div>
+                    
+                    <div class="accordion" id="packageFAQ" data-aos="fade-up">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    What's included in your tour packages?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#packageFAQ">
+                                <div class="accordion-body">
+                                    Our tour packages typically include accommodation, transportation, guided tours, some meals, and entrance fees to attractions. The specifics vary by package, so please check the package details for complete information.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    How do I book a tour package?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#packageFAQ">
+                                <div class="accordion-body">
+                                    You can book a tour package online by selecting the package you're interested in and clicking the "Book Now" button. Follow the instructions to complete your booking. Alternatively, you can contact our customer service team for assistance.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    What is your cancellation policy?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#packageFAQ">
+                                <div class="accordion-body">
+                                    Our standard cancellation policy offers a full refund if canceled 30 days before the trip, 50% refund if canceled 15-29 days before, and no refund if canceled less than 15 days before. However, policies may vary by package, so please check the specific terms during booking.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Can I customize a tour package?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#packageFAQ">
+                                <div class="accordion-body">
+                                    Yes, we offer customization options for many of our packages. Please contact our customer service team with your specific requirements, and we'll work with you to create a personalized itinerary.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Call to Action Section -->
+            <section class="section-padding bg-primary text-white">
+                <div class="container text-center" data-aos="fade-up">
+                    <h2 class="mb-4">Ready to Book Your Next Adventure?</h2>
+                    <p class="mb-5">Contact our travel experts today and start planning your dream vacation!</p>
+                    <a th:href="@{/contact}" class="btn btn-lg btn-light">Contact Us Now</a>
+                </div>
+            </section>
+        </section>
+    </main>
+    
+    <!-- Footer Section -->
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation Library JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Custom JS -->
+    <script th:src="@{/js/main.js}"></script>
+    
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
+</body>
+</html> 

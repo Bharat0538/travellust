@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Testimonials - TravelLust</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- Header Section -->
+    <header th:replace="~{fragments/header :: header}"></header>
+    
+    <!-- Main Content -->
+    <main>
+        <section id="content">
+            <!-- Hero Section -->
+            <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1531572753322-ad063cecc140?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1476&q=80'); min-height: 450px;">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>What Our Travelers Say</h1>
+                        <p>Read genuine reviews from people who have traveled with us</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Testimonials Filter Section -->
+            <section class="section-padding">
+                <div class="container">
+                    <div class="filter-tabs mb-5" data-aos="fade-up">
+                        <ul class="nav nav-pills justify-content-center mb-4">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">All Testimonials</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Asia</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Europe</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Africa</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Americas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Oceania</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Featured Testimonial -->
+                    <div class="featured-testimonial mb-5" data-aos="fade-up">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                <div class="featured-testimonial-img rounded">
+                                    <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Featured Testimonial" class="img-fluid rounded shadow">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="featured-testimonial-content bg-white p-4 shadow-sm rounded">
+                                    <div class="testimonial-text mb-4">
+                                        <i class="fas fa-quote-left fa-2x text-primary opacity-25 mb-3"></i>
+                                        <p class="lead fst-italic">"My trip to Bali with TravelLust was beyond anything I could have imagined. Every detail was perfectly arranged, from the accommodations at stunning beachfront resorts to the cultural excursions led by knowledgeable local guides. I particularly loved the perfect balance between scheduled activities and free time to explore on my own. The customer service was exceptional - when a flight was delayed, the TravelLust team immediately rearranged my pickup and notified the hotel. I've already booked my next adventure with them!"</p>
+                                    </div>
+                                    <div class="testimonial-rating mb-3">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                    </div>
+                                    <div class="testimonial-author d-flex align-items-center">
+                                        <div class="testimonial-author-img me-3">
+                                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sarah Johnson" class="rounded-circle" width="60">
+                                        </div>
+                                        <div class="testimonial-author-info">
+                                            <h5 class="mb-1">Sarah Johnson</h5>
+                                            <p class="mb-0 text-muted">Bali, Indonesia - June 2023</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonials Grid -->
+                    <div class="row">
+                        <!-- Testimonial 1 -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                            <div class="testimonial-card">
+                                <div class="testimonial-text">
+                                    "The European Adventure package exceeded all my expectations. TravelLust handled everything perfectly, from transportation to guided tours. I made memories that will last a lifetime!"
+                                </div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-author-img">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Brown">
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h5>Michael Brown</h5>
+                                        <span>European Adventure - May 2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="testimonial-card">
+                                <div class="testimonial-text">
+                                    "As a solo traveler, I was nervous about my trip to Japan. But TravelLust made me feel safe and supported throughout my journey. The local guides were knowledgeable and friendly!"
+                                </div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-author-img">
+                                        <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Jennifer Lee">
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h5>Jennifer Lee</h5>
+                                        <span>Tokyo, Japan - April 2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="testimonial-card">
+                                <div class="testimonial-text">
+                                    "Our family trip to New York was perfectly organized by TravelLust. The activities were suitable for all ages, and the hotel was centrally located. We'll definitely book with them again!"
+                                </div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-author-img">
+                                        <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="David Wilson">
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h5>David Wilson</h5>
+                                        <span>New York, USA - March 2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 4 -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                            <div class="testimonial-card">
+                                <div class="testimonial-text">
+                                    "The safari in Kenya was the trip of a lifetime! We saw the Big Five in just three days. The accommodations were luxurious yet authentic, and the guides were exceptional."
+                                </div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-author-img">
+                                        <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Emma Thompson">
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h5>Emma Thompson</h5>
+                                        <span>Kenya Safari - February 2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 5 -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="testimonial-card">
+                                <div class="testimonial-text">
+                                    "My honeymoon in Santorini was absolutely magical! TravelLust arranged a private sunset cruise, wine tasting, and the most romantic hotel with an infinity pool overlooking the caldera."
+                                </div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-author-img">
+                                        <img src="https://randomuser.me/api/portraits/women/48.jpg" alt="Sophia Rodriguez">
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h5>Sophia Rodriguez</h5>
+                                        <span>Santorini, Greece - June 2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 6 -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="testimonial-card">
+                                <div class="testimonial-text">
+                                    "I've traveled with many companies, but TravelLust stands out for their attention to detail and personalized service. The Australia adventure was well-planned with the perfect mix of city tours and nature excursions."
+                                </div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-author-img">
+                                        <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Robert Chen">
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h5>Robert Chen</h5>
+                                        <span>Australia - January 2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 7 -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                            <div class="testimonial-card">
+                                <div class="testimonial-text">
+                                    "The historical tour of Rome was incredible! Our guide was a history professor who brought ancient sites to life with fascinating stories. The small group size made it intimate and engaging."
+                                </div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-author-img">
+                                        <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="James Wilson">
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h5>James Wilson</h5>
+                                        <span>Rome, Italy - May 2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 8 -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="testimonial-card">
+                                <div class="testimonial-text">
+                                    "The Tropical Paradise package in Bali exceeded our expectations! The beachfront villa was stunning, and the private driver made exploring the island stress-free. We especially loved the cooking class!"
+                                </div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-author-img">
+                                        <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Amanda Johnson">
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h5>Amanda Johnson</h5>
+                                        <span>Bali, Indonesia - April 2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 9 -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="testimonial-card">
+                                <div class="testimonial-text">
+                                    "As retirees, we were looking for a comfortable way to explore Southeast Asia. TravelLust created the perfect itinerary with a good pace, quality accommodations, and excellent guides who accommodated our needs."
+                                </div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-author-img">
+                                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Richard & Mary Taylor">
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h5>Richard & Mary Taylor</h5>
+                                        <span>Southeast Asia - March 2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center mt-4" data-aos="fade-up">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+            
+            <!-- Leave a Review Section -->
+            <section class="section-padding bg-light">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8" data-aos="fade-up">
+                            <div class="leave-review p-4 bg-white rounded shadow-sm">
+                                <h2 class="text-center mb-4">Share Your Experience</h2>
+                                <p class="text-center mb-4">We value your feedback! Please share your experience traveling with TravelLust.</p>
+                                
+                                <form id="reviewForm">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="reviewName" class="form-label">Your Name</label>
+                                            <input type="text" class="form-control" id="reviewName" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="reviewEmail" class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" id="reviewEmail" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="reviewDestination" class="form-label">Destination Visited</label>
+                                        <input type="text" class="form-control" id="reviewDestination" required>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Your Rating</label>
+                                        <div class="rating-stars">
+                                            <i class="far fa-star star-rating" data-rating="1"></i>
+                                            <i class="far fa-star star-rating" data-rating="2"></i>
+                                            <i class="far fa-star star-rating" data-rating="3"></i>
+                                            <i class="far fa-star star-rating" data-rating="4"></i>
+                                            <i class="far fa-star star-rating" data-rating="5"></i>
+                                        </div>
+                                        <input type="hidden" id="reviewRating" value="0" required>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="reviewText" class="form-label">Your Review</label>
+                                        <textarea class="form-control" id="reviewText" rows="5" required></textarea>
+                                    </div>
+                                    
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary btn-lg">Submit Review</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Video Testimonials Section -->
+            <section class="section-padding">
+                <div class="container">
+                    <div class="section-title" data-aos="fade-up">
+                        <h2>Video Testimonials</h2>
+                        <p>Watch our travelers share their experiences in their own words</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                            <div class="video-testimonial">
+                                <div class="video-thumbnail position-relative">
+                                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Video Testimonial" class="img-fluid rounded">
+                                    <a href="#" class="video-play-btn position-absolute top-50 start-50 translate-middle">
+                                        <i class="fas fa-play"></i>
+                                    </a>
+                                </div>
+                                <div class="video-info mt-3">
+                                    <h5>Exploring Bali with TravelLust</h5>
+                                    <p class="text-muted">Sarah's journey through rice terraces and temples</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="video-testimonial">
+                                <div class="video-thumbnail position-relative">
+                                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Video Testimonial" class="img-fluid rounded">
+                                    <a href="#" class="video-play-btn position-absolute top-50 start-50 translate-middle">
+                                        <i class="fas fa-play"></i>
+                                    </a>
+                                </div>
+                                <div class="video-info mt-3">
+                                    <h5>European Adventure Highlights</h5>
+                                    <p class="text-muted">Michael's tour through Paris, Rome, and Barcelona</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="video-testimonial">
+                                <div class="video-thumbnail position-relative">
+                                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Video Testimonial" class="img-fluid rounded">
+                                    <a href="#" class="video-play-btn position-absolute top-50 start-50 translate-middle">
+                                        <i class="fas fa-play"></i>
+                                    </a>
+                                </div>
+                                <div class="video-info mt-3">
+                                    <h5>Safari Adventure in Kenya</h5>
+                                    <p class="text-muted">Emma's wildlife encounters and luxury camping experience</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- CTA Section -->
+            <section class="section-padding bg-primary text-white">
+                <div class="container text-center" data-aos="fade-up">
+                    <h2 class="mb-4">Ready to Create Your Own Travel Story?</h2>
+                    <p class="mb-5">Join thousands of satisfied travelers and book your next adventure with us!</p>
+                    <div class="d-flex justify-content-center">
+                        <a th:href="@{/destinations}" class="btn btn-light btn-lg me-3">Explore Destinations</a>
+                        <a th:href="@{/contact}" class="btn btn-outline-light btn-lg">Contact Us</a>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+    
+    <!-- Footer Section -->
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation Library JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Custom JS -->
+    <script th:src="@{/js/main.js}"></script>
+    
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
+</body>
+</html> 

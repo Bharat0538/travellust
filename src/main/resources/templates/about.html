@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">About Us - TravelLust</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- Header Section -->
+    <header th:replace="~{fragments/header :: header}"></header>
+    
+    <!-- Main Content -->
+    <main>
+        <section id="content">
+            <!-- Hero Section -->
+            <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1488085061387-422e29b40080?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1731&q=80');">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>About TravelLust</h1>
+                        <p>Get to know our story, our mission, and the team behind your amazing travel experiences</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Our Story Section -->
+            <section class="section-padding">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
+                            <div class="about-img">
+                                <img src="https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Our Story" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="about-content">
+                                <h2>Our Story</h2>
+                                <p>TravelLust was founded in 2010 by a group of passionate travelers who shared a common vision: to help people discover the beauty of our world through meaningful travel experiences.</p>
+                                <p>What started as a small travel blog has grown into a trusted travel company, serving thousands of happy customers worldwide. Our journey has been filled with exploration, learning, and a deep appreciation for diverse cultures and landscapes.</p>
+                                <p>Over the years, we've expanded our destinations and refined our services to offer you the best travel experiences possible. Throughout our growth, we've remained committed to our founding principles of authenticity, sustainability, and personalized service.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Our Mission Section -->
+            <section class="section-padding bg-light">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0" data-aos="fade-up">
+                            <div class="about-img">
+                                <img src="https://images.unsplash.com/photo-1522199710521-72d69614c702?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80" alt="Our Mission" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 order-lg-1" data-aos="fade-up" data-aos-delay="100">
+                            <div class="about-content">
+                                <h2>Our Mission & Values</h2>
+                                <p>At TravelLust, our mission is to create unforgettable travel experiences that inspire, educate, and connect people with the world around them. We believe that travel is more than just visiting places; it's about creating meaningful connections and memories that last a lifetime.</p>
+                                <div class="about-features">
+                                    <div class="about-feature">
+                                        <div class="about-feature-icon">
+                                            <i class="fas fa-heart"></i>
+                                        </div>
+                                        <div class="about-feature-content">
+                                            <h4>Passion</h4>
+                                            <p>We're passionate about travel and dedicated to sharing that passion with our customers.</p>
+                                        </div>
+                                    </div>
+                                    <div class="about-feature">
+                                        <div class="about-feature-icon">
+                                            <i class="fas fa-leaf"></i>
+                                        </div>
+                                        <div class="about-feature-content">
+                                            <h4>Sustainability</h4>
+                                            <p>We're committed to responsible tourism practices that respect local communities and environments.</p>
+                                        </div>
+                                    </div>
+                                    <div class="about-feature">
+                                        <div class="about-feature-icon">
+                                            <i class="fas fa-handshake"></i>
+                                        </div>
+                                        <div class="about-feature-content">
+                                            <h4>Integrity</h4>
+                                            <p>We operate with honesty and transparency in all our dealings with customers and partners.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Our Team Section -->
+            <section class="section-padding">
+                <div class="container">
+                    <div class="section-title text-center" data-aos="fade-up">
+                        <h2>Meet Our Team</h2>
+                        <p>The passionate individuals who make your dream vacations a reality</p>
+                    </div>
+                    
+                    <div class="row">
+                        <!-- Team Member 1 -->
+                        <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
+                            <div class="team-member text-center">
+                                <div class="team-img mb-3">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Smith" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                                </div>
+                                <h4>John Smith</h4>
+                                <p class="text-muted">Founder & CEO</p>
+                                <div class="social-links mt-3">
+                                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Team Member 2 -->
+                        <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="team-member text-center">
+                                <div class="team-img mb-3">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                                </div>
+                                <h4>Sarah Johnson</h4>
+                                <p class="text-muted">Travel Director</p>
+                                <div class="social-links mt-3">
+                                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Team Member 3 -->
+                        <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="team-member text-center">
+                                <div class="team-img mb-3">
+                                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Michael Brown" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                                </div>
+                                <h4>Michael Brown</h4>
+                                <p class="text-muted">Operations Manager</p>
+                                <div class="social-links mt-3">
+                                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Team Member 4 -->
+                        <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                            <div class="team-member text-center">
+                                <div class="team-img mb-3">
+                                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily Davis" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                                </div>
+                                <h4>Emily Davis</h4>
+                                <p class="text-muted">Customer Service Manager</p>
+                                <div class="social-links mt-3">
+                                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Why Choose Us Section -->
+            <section class="section-padding bg-light">
+                <div class="container">
+                    <div class="section-title text-center" data-aos="fade-up">
+                        <h2>Why Choose TravelLust</h2>
+                        <p>Discover what sets us apart from other travel companies</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                            <div class="why-choose-item text-center p-4 bg-white rounded shadow-sm">
+                                <div class="icon-box mb-3">
+                                    <i class="fas fa-map-marked-alt fa-3x text-primary"></i>
+                                </div>
+                                <h4>Expertly Crafted Itineraries</h4>
+                                <p>Our travel experts carefully design each itinerary to include the perfect balance of must-see attractions and hidden gems.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="why-choose-item text-center p-4 bg-white rounded shadow-sm">
+                                <div class="icon-box mb-3">
+                                    <i class="fas fa-user-shield fa-3x text-primary"></i>
+                                </div>
+                                <h4>Safety & Support</h4>
+                                <p>Your safety is our priority. Our 24/7 support team is always available to assist you throughout your journey.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="why-choose-item text-center p-4 bg-white rounded shadow-sm">
+                                <div class="icon-box mb-3">
+                                    <i class="fas fa-hand-holding-usd fa-3x text-primary"></i>
+                                </div>
+                                <h4>Value for Money</h4>
+                                <p>We offer competitive prices without compromising on quality, ensuring you get the best value for your investment.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                            <div class="why-choose-item text-center p-4 bg-white rounded shadow-sm">
+                                <div class="icon-box mb-3">
+                                    <i class="fas fa-award fa-3x text-primary"></i>
+                                </div>
+                                <h4>Exceptional Quality</h4>
+                                <p>From accommodation to transportation, we partner with trusted providers to ensure high-quality experiences.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="why-choose-item text-center p-4 bg-white rounded shadow-sm">
+                                <div class="icon-box mb-3">
+                                    <i class="fas fa-users fa-3x text-primary"></i>
+                                </div>
+                                <h4>Small Group Sizes</h4>
+                                <p>Our tours maintain small group sizes to create a more personalized and intimate travel experience.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="why-choose-item text-center p-4 bg-white rounded shadow-sm">
+                                <div class="icon-box mb-3">
+                                    <i class="fas fa-heart fa-3x text-primary"></i>
+                                </div>
+                                <h4>Passionate Team</h4>
+                                <p>Our team consists of passionate travelers who genuinely care about creating memorable experiences for you.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Statistics Section -->
+            <section class="section-padding bg-primary text-white">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-md-3 col-6 mb-4" data-aos="fade-up">
+                            <div class="statistic-item">
+                                <h2 class="counter" data-count="12">0</h2>
+                                <p>Years of Experience</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="statistic-item">
+                                <h2 class="counter" data-count="15000">0</h2>
+                                <p>Happy Travelers</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="statistic-item">
+                                <h2 class="counter" data-count="120">0</h2>
+                                <p>Destinations</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                            <div class="statistic-item">
+                                <h2 class="counter" data-count="50">0</h2>
+                                <p>Countries Covered</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Testimonials Section -->
+            <section class="section-padding">
+                <div class="container">
+                    <div class="section-title" data-aos="fade-up">
+                        <h2>What Our Clients Say</h2>
+                        <p>Read about the experiences of travelers who've explored the world with us</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                            <div class="testimonial-card">
+                                <div class="testimonial-text">
+                                    "My trip to Bali with TravelLust was absolutely amazing! The accommodations were top-notch, and the itinerary was perfectly balanced between adventure and relaxation. Their customer service was exceptional!"
+                                </div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-author-img">
+                                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sarah Johnson">
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h5>Sarah Johnson</h5>
+                                        <span>Bali, Indonesia</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="testimonial-card">
+                                <div class="testimonial-text">
+                                    "The European Adventure package exceeded all my expectations. TravelLust handled everything perfectly, from transportation to guided tours. I made memories that will last a lifetime!"
+                                </div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-author-img">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Brown">
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h5>Michael Brown</h5>
+                                        <span>European Adventure</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="testimonial-card">
+                                <div class="testimonial-text">
+                                    "As a solo traveler, I was nervous about my trip to Japan. But TravelLust made me feel safe and supported throughout my journey. The local guides were knowledgeable and friendly!"
+                                </div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-author-img">
+                                        <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Jennifer Lee">
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h5>Jennifer Lee</h5>
+                                        <span>Tokyo, Japan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-3" data-aos="fade-up">
+                        <a th:href="@{/testimonials}" class="btn btn-primary">View All Testimonials</a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Partners Section -->
+            <section class="section-padding bg-light">
+                <div class="container">
+                    <div class="section-title" data-aos="fade-up">
+                        <h2>Our Partners</h2>
+                        <p>We collaborate with trusted brands to provide you with exceptional travel experiences</p>
+                    </div>
+                    
+                    <div class="row align-items-center justify-content-center text-center">
+                        <div class="col-md-2 col-6 mb-4" data-aos="fade-up">
+                            <img src="https://via.placeholder.com/150x80?text=Partner+1" alt="Partner 1" class="img-fluid">
+                        </div>
+                        <div class="col-md-2 col-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <img src="https://via.placeholder.com/150x80?text=Partner+2" alt="Partner 2" class="img-fluid">
+                        </div>
+                        <div class="col-md-2 col-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <img src="https://via.placeholder.com/150x80?text=Partner+3" alt="Partner 3" class="img-fluid">
+                        </div>
+                        <div class="col-md-2 col-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                            <img src="https://via.placeholder.com/150x80?text=Partner+4" alt="Partner 4" class="img-fluid">
+                        </div>
+                        <div class="col-md-2 col-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                            <img src="https://via.placeholder.com/150x80?text=Partner+5" alt="Partner 5" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- CTA Section -->
+            <section class="section-padding bg-primary text-white">
+                <div class="container text-center" data-aos="fade-up">
+                    <h2 class="mb-4">Ready to Start Your Journey?</h2>
+                    <p class="mb-5">Contact us today and let our travel experts help you plan your dream vacation!</p>
+                    <a th:href="@{/contact}" class="btn btn-lg btn-light">Contact Us Now</a>
+                </div>
+            </section>
+        </section>
+    </main>
+    
+    <!-- Footer Section -->
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation Library JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Custom JS -->
+    <script th:src="@{/js/main.js}"></script>
+    
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
+</body>
+</html> 

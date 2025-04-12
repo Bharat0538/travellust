@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <footer th:fragment="footer" class="footer bg-dark text-white pt-5 pb-4">
+        <div class="container">
+            <div class="row">
+                <!-- Company Info -->
+                <div class="col-md-4 mb-4" data-aos="fade-up">
+                    <h5 class="text-uppercase mb-4">TravelLust</h5>
+                    <p>Discover the world with TravelLust. We offer unforgettable travel experiences to the most beautiful destinations around the globe.</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <h5 class="text-uppercase mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a th:href="@{/}" class="footer-link">Home</a></li>
+                        <li><a th:href="@{/destinations}" class="footer-link">Destinations</a></li>
+                        <li><a th:href="@{/packages}" class="footer-link">Tour Packages</a></li>
+                        <li><a th:href="@{/about}" class="footer-link">About Us</a></li>
+                        <li><a th:href="@{/testimonials}" class="footer-link">Testimonials</a></li>
+                        <li><a th:href="@{/contact}" class="footer-link">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Popular Destinations -->
+                <div class="col-md-2 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <h5 class="text-uppercase mb-4">Destinations</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="footer-link">Bali, Indonesia</a></li>
+                        <li><a href="#" class="footer-link">Paris, France</a></li>
+                        <li><a href="#" class="footer-link">Santorini, Greece</a></li>
+                        <li><a href="#" class="footer-link">Tokyo, Japan</a></li>
+                        <li><a href="#" class="footer-link">New York, USA</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <h5 class="text-uppercase mb-4">Contact Us</h5>
+                    <ul class="list-unstyled contact-info">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Travel Street, City, Country</li>
+                        <li><i class="fas fa-phone me-2"></i> +1 (123) 456-7890</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@travellust.com</li>
+                    </ul>
+                    <div class="newsletter mt-3">
+                        <h6>Subscribe to our newsletter</h6>
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-primary" type="button">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="mt-4 mb-4">
+            
+            <!-- Copyright -->
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p>&copy; <span class="copyright-year">2023</span> TravelLust. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="#" class="footer-link">Privacy Policy</a></li>
+                        <li class="list-inline-item"><a href="#" class="footer-link">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
