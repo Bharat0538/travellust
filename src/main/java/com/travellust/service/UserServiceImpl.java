@@ -61,4 +61,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new NoSuchElementException("User not found with email: " + email));
     }
+
+    @Override
+    public User getDefaultUser() {
+        return userRepository.findAll()
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("No users found in the database"));
+    }
 } 

@@ -45,4 +45,22 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+    
+    /**
+     * Get the user's full name
+     * 
+     * @return The combined first and last name
+     */
+    public String getName() {
+        if (firstName == null && lastName == null) {
+            return "User";
+        }
+        if (firstName == null) {
+            return lastName;
+        }
+        if (lastName == null) {
+            return firstName;
+        }
+        return firstName + " " + lastName;
+    }
 } 

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <!-- Page Header for non-home pages -->
+    <div th:fragment="page-header(title, description)" class="page-header">
+        <div class="container">
+            <h1 th:text="${title}">Page Title</h1>
+            <p th:text="${description}">Page description goes here</p>
+        </div>
+    </div>
+</body>
+</html> 

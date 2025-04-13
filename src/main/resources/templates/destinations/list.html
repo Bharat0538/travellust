@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations | TravelLust</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+</head>
+<body>
+
+<!-- Header -->
+<header th:replace="~{fragments/header :: header}"></header>
+
+<!-- Hero Section -->
+<section class="hero-section parallax-bg" style="background-image: url('/static/images/destinations-hero.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="hero-content text-center" data-aos="fade-up">
+            <h1 th:text="${featured != null && featured ? 'Featured Destinations' : 'Explore Our Destinations'}">Explore Our Destinations</h1>
+            <p>Discover amazing places around the world and plan your next adventure</p>
+        </div>
+    </div>
+</section>
+
+<!-- Filter Section -->
+<section class="filter-section py-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Filter Destinations</h5>
+                        <form action="#" th:action="@{/destinations}" method="get" class="row g-3">
+                            <!-- Type Filter -->
+                            <div class="col-md-3">
+                                <label for="type" class="form-label">Destination Type</label>
+                                <select id="type" name="type" class="form-select">
+                                    <option value="">All Types</option>
+                                    <option th:each="type : ${types}" 
+                                            th:value="${type}" 
+                                            th:text="${type}"
+                                            th:selected="${filterType != null && filterType == type}"></option>
+                                </select>
+                            </div>
+                            
+                            <!-- Country Filter -->
+                            <div class="col-md-3">
+                                <label for="country" class="form-label">Country</label>
+                                <select id="country" name="country" class="form-select">
+                                    <option value="">All Countries</option>
+                                    <option th:each="country : ${countries}" 
+                                            th:value="${country}" 
+                                            th:text="${country}"
+                                            th:selected="${filterCountry != null && filterCountry == country}"></option>
+                                </select>
+                            </div>
+                            
+                            <!-- Rating Filter -->
+                            <div class="col-md-3">
+                                <label for="minRating" class="form-label">Minimum Rating</label>
+                                <select id="minRating" name="minRating" class="form-select">
+                                    <option value="">Any Rating</option>
+                                    <option value="3" th:selected="${filterMinRating != null && filterMinRating == 3}">3+ Stars</option>
+                                    <option value="3.5" th:selected="${filterMinRating != null && filterMinRating == 3.5}">3.5+ Stars</option>
+                                    <option value="4" th:selected="${filterMinRating != null && filterMinRating == 4}">4+ Stars</option>
+                                    <option value="4.5" th:selected="${filterMinRating != null && filterMinRating == 4.5}">4.5+ Stars</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Search Keyword -->
+                            <div class="col-md-3">
+                                <label for="keyword" class="form-label">Search</label>
+                                <input type="text" class="form-control" id="keyword" name="keyword" 
+                                       placeholder="Search destinations..." th:value="${filterKeyword}">
+                            </div>
+                            
+                            <!-- Submit Button -->
+                            <div class="col-12 mt-3">
+                                <button type="submit" class="btn btn-primary">Apply Filters</button>
+                                <a th:href="@{/destinations}" class="btn btn-outline-secondary">Clear Filters</a>
+                                <a th:href="@{/destinations/featured}" class="btn btn-outline-primary ms-2">Featured Only</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Destinations List -->
+<section class="destinations-section py-5">
+    <div class="container">
+        <!-- Current Filter Info -->
+        <div class="row mb-4" th:if="${filterType != null || filterCountry != null || filterKeyword != null || filterMinRating != null}">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <span th:if="${filterType != null}">Type: <strong th:text="${filterType}"></strong></span>
+                    <span th:if="${filterCountry != null}">Country: <strong th:text="${filterCountry}"></strong></span>
+                    <span th:if="${filterKeyword != null}">Search: <strong th:text="${filterKeyword}"></strong></span>
+                    <span th:if="${filterMinRating != null}">Minimum Rating: <strong th:text="${filterMinRating} + ' Stars'"></strong></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row" th:if="${destinations.isEmpty()}">
+            <div class="col-12 text-center py-5">
+                <i class="fas fa-search fa-3x text-secondary mb-3"></i>
+                <h3>No destinations found</h3>
+                <p>Try changing your search criteria or browse our featured destinations.</p>
+                <a th:href="@{/destinations}" class="btn btn-primary mt-3">View All Destinations</a>
+            </div>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="col" th:each="destination : ${destinations}" data-aos="fade-up">
+                <div class="card h-100 destination-card shadow-sm">
+                    <div class="position-relative">
+                        <img th:src="${destination.imageUrl != null ? destination.imageUrl : '/static/images/destination-placeholder.jpg'}" 
+                             class="card-img-top destination-img" alt="Destination Image">
+                        <span class="badge bg-warning position-absolute top-0 end-0 m-2" 
+                              th:if="${destination.featured}">Featured</span>
+                        <div class="destination-type-badge" th:if="${destination.type != null}">
+                            <span class="badge bg-primary" th:text="${destination.type}">BEACH</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title" th:text="${destination.name}">Destination Name</h5>
+                            <div class="rating" th:if="${destination.averageRating != null}">
+                                <span class="badge bg-success" th:text="${destination.averageRating} + ' ★'">4.5 ★</span>
+                            </div>
+                        </div>
+                        <p class="card-text location">
+                            <i class="fas fa-map-marker-alt text-danger"></i> 
+                            <span th:text="${destination.country}">Country</span>
+                        </p>
+                        <p class="card-text description" th:text="${#strings.abbreviate(destination.description, 100)}">
+                            Description about this beautiful destination...
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <div class="d-grid">
+                            <a th:href="@{/destinations/{id}(id=${destination.id})}" class="btn btn-outline-primary">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section th:replace="~{fragments/newsletter :: newsletter}"></section>
+
+<!-- Footer -->
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+<!-- Bootstrap & JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script th:src="@{/static/js/main.js}"></script>
+<script>
+    // Initialize AOS
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+</script>
+</body>
+</html> 

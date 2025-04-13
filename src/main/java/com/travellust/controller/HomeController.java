@@ -15,14 +15,14 @@ public class HomeController {
         return "index";
     }
     
-    @GetMapping("/destinations")
+    @GetMapping("/explore-destinations")
     public String destinations(Model model) {
         model.addAttribute("title", "Explore Destinations - TravelLust");
         model.addAttribute("activeTab", "destinations");
         return "destinations";
     }
     
-    @GetMapping("/packages")
+    @GetMapping("/explore-packages")
     public String packages(Model model) {
         model.addAttribute("title", "Tour Packages - TravelLust");
         model.addAttribute("activeTab", "packages");

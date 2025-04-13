@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details - TravelLust</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --light-bg: #f8f9fa;
+            --dark-text: #1f2937;
+            --light-text: #6b7280;
+            --accent-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --border-color: #e5e7eb;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-text);
+            background-color: #f8f9fa;
+            line-height: 1.6;
+            padding-top: 70px;
+        }
+        
+        /* Fixed Header Styles */
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .container-fluid {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-text);
+            transition: var(--transition);
+            position: relative;
+            margin: 0 0.5rem;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        /* Page header */
+        .page-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .section-heading {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.25rem;
+            margin-top: 2rem;
+        }
+        
+        /* Information Table Styles */
+        .info-table {
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-table td {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .info-table td:first-child {
+            width: 35%;
+            font-weight: 500;
+            color: var(--light-text);
+        }
+        
+        /* Price Summary Styles */
+        .price-summary {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-top: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed var(--border-color);
+        }
+        
+        .price-total {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            border-top: 2px solid var(--border-color);
+            padding-top: 0.75rem;
+            border-bottom: none;
+        }
+        
+        /* Badge Styling */
+        .badge {
+            padding: 0.5em 0.75em;
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 767px) {
+            .info-table td:first-child {
+                width: 40%;
+            }
+            
+            .section-heading {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header class="fixed-header">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/}">TravelLust</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/destinations}">Destinations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/tour-packages}">Tour Packages</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/bookings}">My Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/account}">My Account</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Booking Details</h1>
+            <p class="mb-0">Booking Reference: <strong th:text="${booking.bookingReference}">TL-12345-XYZ</strong></p>
+        </div>
+    </div>
+    
+    <main>
+        <div class="container">
+            <!-- Booking Details Section -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3 class="section-heading">
+                        <i class="fas fa-suitcase me-2"></i> Trip Details
+                    </h3>
+                    <table class="info-table">
+                        <tr>
+                            <td>Package Name:</td>
+                            <td th:text="${booking.packageName}">European Adventure</td>
+                        </tr>
+                        <tr>
+                            <td>Destination:</td>
+                            <td th:text="${booking.destinationName}">Paris, France</td>
+                        </tr>
+                        <tr>
+                            <td>Travel Date:</td>
+                            <td>
+                                <span th:text="${#temporals.format(booking.travelDate, 'MMM dd, yyyy')}">Jun 15, 2023</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Travelers:</td>
+                            <td th:text="${booking.numberOfPeople}">2 Adults</td>
+                        </tr>
+                        <tr>
+                            <td>Status:</td>
+                            <td>
+                                <span class="badge bg-success" th:text="${booking.status}">Confirmed</span>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Customer Information Section -->
+                    <h3 class="section-heading">
+                        <i class="fas fa-user me-2"></i> Customer Information
+                    </h3>
+                    <table class="info-table">
+                        <!-- Try contactName first, then userName as fallback -->
+                        <tr>
+                            <td>Name:</td>
+                            <td>
+                                <span th:if="${booking.contactName != null && !booking.contactName.isEmpty()}" 
+                                      th:text="${booking.contactName}">John Doe</span>
+                                <span th:if="${(booking.contactName == null || booking.contactName.isEmpty()) && booking.userName != null}" 
+                                      th:text="${booking.userName}">John Doe</span>
+                                <span th:if="${(booking.contactName == null || booking.contactName.isEmpty()) && 
+                                              (booking.userName == null || booking.userName.isEmpty())}" 
+                                      class="text-muted">Not provided</span>
+                            </td>
+                        </tr>
+                        <!-- Show email if available -->
+                        <tr>
+                            <td>Email:</td>
+                            <td>
+                                <span th:if="${booking.contactEmail != null && !booking.contactEmail.isEmpty()}" 
+                                      th:text="${booking.contactEmail}">john.doe@example.com</span>
+                                <span th:if="${booking.contactEmail == null || booking.contactEmail.isEmpty()}" 
+                                      class="text-muted">Not provided</span>
+                            </td>
+                        </tr>
+                        <!-- Show phone if available -->
+                        <tr>
+                            <td>Phone:</td>
+                            <td>
+                                <span th:if="${booking.contactPhone != null && !booking.contactPhone.isEmpty()}" 
+                                      th:text="${booking.contactPhone}">+1 123-456-7890</span>
+                                <span th:if="${booking.contactPhone == null || booking.contactPhone.isEmpty()}" 
+                                      class="text-muted">Not provided</span>
+                            </td>
+                        </tr>
+                        <!-- Show special requests if available -->
+                        <tr>
+                            <td>Special Requests:</td>
+                            <td>
+                                <span th:if="${booking.specialRequests != null && !booking.specialRequests.isEmpty()}" 
+                                      th:text="${booking.specialRequests}">Early check-in requested</span>
+                                <span th:if="${booking.specialRequests == null || booking.specialRequests.isEmpty()}" 
+                                      class="text-muted">None</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h3 class="section-heading">
+                        <i class="fas fa-receipt me-2"></i> Payment Details
+                    </h3>
+                    <table class="info-table">
+                        <tr th:if="${booking.payment != null && booking.payment.id != null}">
+                            <td>Payment ID:</td>
+                            <td th:text="${booking.payment.id}">PAY-12345678</td>
+                        </tr>
+                        <tr>
+                            <td>Status:</td>
+                            <td>
+                                <span class="badge bg-success" th:text="${booking.paymentStatus}">Completed</span>
+                            </td>
+                        </tr>
+                        <tr th:if="${booking.paymentMethod != null}">
+                            <td>Method:</td>
+                            <td th:text="${booking.paymentMethod}">Credit Card</td>
+                        </tr>
+                    </table>
+                    
+                    <div class="price-summary">
+                        <h4 class="mb-3">Price Summary</h4>
+                        <div class="price-row">
+                            <span>Package Price</span>
+                            <span th:text="${'$' + booking.packagePrice}">$1,199.00</span>
+                        </div>
+                        <div class="price-row" th:if="${booking.discountAmount != null && booking.discountAmount > 0}">
+                            <span>Discount</span>
+                            <span th:text="${'-$' + booking.discountAmount}">-$119.90</span>
+                        </div>
+                        <div class="price-total price-row">
+                            <span>Total Amount</span>
+                            <span th:text="${'$' + booking.totalAmount}">$1,187.01</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a th:href="@{/bookings}" class="btn btn-outline-primary w-100 mb-2">Back to My Bookings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

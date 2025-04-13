@@ -9,4 +9,10 @@ public interface UserService {
     boolean existsByEmail(String email);
     
     User findByEmail(String email);
+    
+    /**
+     * Get a default user for demo/testing purposes
+     * @return A default user from the database
+     */
+    User getDefaultUser();
 } 

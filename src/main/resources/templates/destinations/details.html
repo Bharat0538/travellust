@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${destination.name + ' | TravelLust'}">Destination Details | TravelLust</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .hero-section {
+            height: 60vh;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            position: relative;
+        }
+        .hero-section .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .badge-fixed {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 3;
+        }
+        .destination-gallery .gallery-item {
+            height: 200px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .destination-gallery .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .destination-gallery .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .tour-package-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tour-package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .overview-box {
+            border-radius: 8px;
+            padding: 20px;
+            background: #f8f9fa;
+            margin-bottom: 20px;
+        }
+        .weather-widget {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .attractions-list li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header th:replace="~{fragments/header :: header}"></header>
+
+<!-- Hero Section -->
+<section class="hero-section" th:style="'background-image: url(' + ${destination.imageUrl != null ? destination.imageUrl : '/img/destination-placeholder.jpg'} + ');'">
+    <div class="overlay"></div>
+    <span class="badge badge-fixed bg-warning" th:if="${destination.featured}">Featured</span>
+    <div class="container">
+        <div class="hero-content" data-aos="fade-up">
+            <h1 th:text="${destination.name}">Destination Name</h1>
+            <div class="d-flex justify-content-center align-items-center mt-3">
+                <span class="badge bg-primary me-2" th:text="${destination.type}">BEACH</span>
+                <i class="fas fa-map-marker-alt text-danger"></i>
+                <span class="ms-1 text-white" th:text="${destination.country}">Country</span>
+                <span class="mx-2">|</span>
+                <div class="rating">
+                    <span class="badge bg-success" th:if="${destination.averageRating != null}" th:text="${destination.averageRating} + ' ★'">4.5 ★</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Destination Details Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Destination Overview -->
+            <div class="col-lg-8" data-aos="fade-up">
+                <div class="overview-box">
+                    <h3 class="mb-4">Overview</h3>
+                    <p class="lead" th:text="${destination.description}">
+                        Detailed description about this beautiful destination. Information about its history, culture, and attractions.
+                    </p>
+                </div>
+                
+                <!-- Attractions -->
+                <div class="my-4">
+                    <h3 class="mb-3">Popular Attractions</h3>
+                    <ul class="attractions-list">
+                        <li><i class="fas fa-landmark text-primary me-2"></i> Historical sites and monuments</li>
+                        <li><i class="fas fa-umbrella-beach text-warning me-2"></i> Beautiful beaches and natural wonders</li>
+                        <li><i class="fas fa-utensils text-success me-2"></i> Local cuisine and fine dining</li>
+                        <li><i class="fas fa-store text-info me-2"></i> Shopping districts and markets</li>
+                        <li><i class="fas fa-music text-danger me-2"></i> Nightlife and entertainment</li>
+                    </ul>
+                </div>
+                
+                <!-- Photo Gallery -->
+                <div class="destination-gallery my-5">
+                    <h3 class="mb-3">Photo Gallery</h3>
+                    <div class="row">
+                        <div class="col-md-4 col-6">
+                            <div class="gallery-item">
+                                <img th:src="${destination.imageUrl != null ? destination.imageUrl : '/img/destination-placeholder.jpg'}" alt="Gallery image">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <div class="gallery-item">
+                                <img src="https://source.unsplash.com/random/300x200/?travel" alt="Gallery image">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <div class="gallery-item">
+                                <img src="https://source.unsplash.com/random/300x200/?landmark" alt="Gallery image">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <div class="gallery-item">
+                                <img src="https://source.unsplash.com/random/300x200/?beach" alt="Gallery image">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <div class="gallery-item">
+                                <img src="https://source.unsplash.com/random/300x200/?city" alt="Gallery image">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <div class="gallery-item">
+                                <img src="https://source.unsplash.com/random/300x200/?nature" alt="Gallery image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Weather Widget -->
+                <div class="weather-widget mb-4" data-aos="fade-left">
+                    <h4><i class="fas fa-cloud-sun me-2"></i> Weather</h4>
+                    <div class="d-flex justify-content-between align-items-center my-3">
+                        <div>
+                            <h2 class="mb-0">28°C</h2>
+                            <small>Sunny</small>
+                        </div>
+                        <i class="fas fa-sun fa-3x"></i>
+                    </div>
+                    <div class="row text-center mt-3">
+                        <div class="col-3">
+                            <div>Mon</div>
+                            <i class="fas fa-cloud"></i>
+                            <div>24°C</div>
+                        </div>
+                        <div class="col-3">
+                            <div>Tue</div>
+                            <i class="fas fa-sun"></i>
+                            <div>28°C</div>
+                        </div>
+                        <div class="col-3">
+                            <div>Wed</div>
+                            <i class="fas fa-cloud-sun"></i>
+                            <div>26°C</div>
+                        </div>
+                        <div class="col-3">
+                            <div>Thu</div>
+                            <i class="fas fa-cloud"></i>
+                            <div>25°C</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Travel Tips -->
+                <div class="card shadow-sm mb-4" data-aos="fade-left" data-aos-delay="100">
+                    <div class="card-body">
+                        <h4 class="card-title"><i class="fas fa-info-circle text-primary me-2"></i> Travel Tips</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><i class="fas fa-language me-2 text-info"></i> <strong>Language:</strong> English, Local Language</li>
+                            <li class="list-group-item"><i class="fas fa-money-bill-wave me-2 text-success"></i> <strong>Currency:</strong> Local Currency (USD accepted)</li>
+                            <li class="list-group-item"><i class="fas fa-plug me-2 text-warning"></i> <strong>Power:</strong> 220V, European plug</li>
+                            <li class="list-group-item"><i class="fas fa-clock me-2 text-secondary"></i> <strong>Time Zone:</strong> GMT+2</li>
+                            <li class="list-group-item"><i class="fas fa-plane-departure me-2 text-primary"></i> <strong>Best Time to Visit:</strong> March to October</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Call to Action -->
+                <div class="card shadow-sm border-primary" data-aos="fade-left" data-aos-delay="200">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Ready to explore?</h4>
+                        <p class="card-text">Check out our tour packages for this destination</p>
+                        <a href="#tour-packages" class="btn btn-primary btn-lg w-100 mt-2">View Tour Packages</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tour Packages Section -->
+<section id="tour-packages" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2>Tour Packages for <span th:text="${destination.name}">Destination</span></h2>
+            <p class="lead">Find the perfect package for your next adventure</p>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <!-- Sample Tour Packages - In a real app, these would be dynamically loaded -->
+            <div class="col" data-aos="fade-up">
+                <div class="card h-100 tour-package-card shadow-sm">
+                    <img src="https://source.unsplash.com/random/300x200/?vacation" class="card-img-top" alt="Package Image">
+                    <div class="card-body">
+                        <span class="badge bg-warning mb-2">20% OFF</span>
+                        <h5 class="card-title">Adventure Tour</h5>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span><i class="fas fa-clock text-secondary"></i> 7 days</span>
+                            <div>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star-half-alt text-warning"></i>
+                                <small>(4.5)</small>
+                            </div>
+                        </div>
+                        <p class="card-text">Explore the adventurous side of this beautiful destination with our guided tour.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div>
+                                <del class="text-muted">$1,299</del>
+                                <div class="fs-5 fw-bold text-primary">$999</div>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100 tour-package-card shadow-sm">
+                    <img src="https://source.unsplash.com/random/300x200/?luxury" class="card-img-top" alt="Package Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Luxury Retreat</h5>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span><i class="fas fa-clock text-secondary"></i> 5 days</span>
+                            <div>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <small>(5.0)</small>
+                            </div>
+                        </div>
+                        <p class="card-text">Indulge in luxury and relaxation with our premium retreat package.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="fs-5 fw-bold text-primary">$1,499</div>
+                            <a href="#" class="btn btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col" data-aos="fade-up" data-aos-delay="200">
+                <div class="card h-100 tour-package-card shadow-sm">
+                    <img src="https://source.unsplash.com/random/300x200/?family" class="card-img-top" alt="Package Image">
+                    <div class="card-body">
+                        <span class="badge bg-info mb-2">FAMILY</span>
+                        <h5 class="card-title">Family Holiday</h5>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span><i class="fas fa-clock text-secondary"></i> 6 days</span>
+                            <div>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="far fa-star text-warning"></i>
+                                <small>(4.0)</small>
+                            </div>
+                        </div>
+                        <p class="card-text">Fun activities for the whole family with our specially designed package.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="fs-5 fw-bold text-primary">$1,199</div>
+                            <a href="#" class="btn btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a th:href="@{/tour-packages(destinationId=${destination.id})}" class="btn btn-primary">View All Packages</a>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-4" data-aos="fade-up">
+            <h2>Location</h2>
+            <p class="lead">Find your way around <span th:text="${destination.name}">Destination</span></p>
+        </div>
+        
+        <div class="card shadow-sm" data-aos="zoom-in">
+            <div class="card-body p-0">
+                <!-- For a real app, replace this with an actual Google Maps embed with the correct location -->
+                <iframe
+                    width="100%"
+                    height="450"
+                    frameborder="0"
+                    style="border:0"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937576!2d2.292292616281655!3d48.85837007928757!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sEiffel%20Tower!5e0!3m2!1sen!2sus!4v1601474815868!5m2!1sen!2sus"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-4" data-aos="fade-up">
+            <h2>Traveler Reviews</h2>
+            <p class="lead">What our customers say about <span th:text="${destination.name}">Destination</span></p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 mb-4" data-aos="fade-up">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex mb-3">
+                            <img src="https://randomuser.me/api/portraits/women/85.jpg" class="rounded-circle me-3" alt="Reviewer" width="60" height="60">
+                            <div>
+                                <h5 class="card-title mb-1">Sarah Johnson</h5>
+                                <div class="text-warning mb-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <small class="text-muted">Visited March 2025</small>
+                            </div>
+                        </div>
+                        <p class="card-text">"This destination exceeded all my expectations! The beauty of the landscape, the hospitality of the locals, and the amazing food made this trip unforgettable. Highly recommended!"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex mb-3">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-3" alt="Reviewer" width="60" height="60">
+                            <div>
+                                <h5 class="card-title mb-1">Michael Brown</h5>
+                                <div class="text-warning mb-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <small class="text-muted">Visited January 2025</small>
+                            </div>
+                        </div>
+                        <p class="card-text">"Great experience overall! The tours were well-organized and our guide was very knowledgeable. I only wish we had more time to explore on our own. Will definitely come back!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-3">
+            <a href="#" class="btn btn-outline-primary">Read All Reviews</a>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section th:replace="~{fragments/newsletter :: newsletter}"></section>
+
+<!-- Footer -->
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+<!-- Bootstrap & JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script th:src="@{/js/main.js}"></script>
+<script>
+    // Initialize AOS
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+</script>
+</body>
+</html> 

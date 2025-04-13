@@ -42,7 +42,9 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/", "/login", "/register", "/error", "/css/**", "/js/**", "/images/**", "/h2-console/**").permitAll()
                 .requestMatchers("/oauth2/**").permitAll()
-                .requestMatchers("/destinations", "/packages", "/about", "/testimonials", "/contact").permitAll()
+                .requestMatchers("/destinations/**", "/packages/**", "/tour-packages/**", "/about", "/testimonials", "/contact").permitAll()
+                .requestMatchers("/explore-destinations", "/explore-packages").permitAll()
+                .requestMatchers("/destination/**", "/package/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )

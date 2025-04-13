@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${package.name} + ' | TravelLust'">Package Details | TravelLust</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+    <!-- Date picker styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+
+<!-- Header -->
+<header th:replace="~{fragments/header :: header}"></header>
+
+<!-- Package Hero Section -->
+<section class="package-hero-section parallax-bg" th:style="'background-image: url(' + ${package.imageUrl} + ');'">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="hero-content text-center" data-aos="fade-up">
+            <span class="badge bg-primary mb-2" th:text="${package.packageType}">ADVENTURE</span>
+            <h1 th:text="${package.name}">Package Name</h1>
+            <p class="location">
+                <i class="fas fa-map-marker-alt"></i> 
+                <span th:text="${package.destinationName} + ', ' + ${package.destinationCountry}">Destination, Country</span>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Package Details -->
+<section class="package-details-section py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8" data-aos="fade-up">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title">Overview</h2>
+                        <p class="card-text" th:text="${package.description}">
+                            Detailed description of the package...
+                        </p>
+                        
+                        <div class="package-highlights mb-4">
+                            <h3>Package Highlights</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <i class="fas fa-calendar-alt text-primary me-2"></i>
+                                            <span th:text="${package.duration} + ' days'">7 days</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fas fa-users text-primary me-2"></i>
+                                            <span th:text="'Max ' + ${package.maxGroupSize} + ' people'">Max 15 people</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fas fa-language text-primary me-2"></i>
+                                            English-speaking guide
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <i class="fas fa-hotel text-primary me-2"></i>
+                                            4-star accommodations
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fas fa-utensils text-primary me-2"></i>
+                                            Breakfast included
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fas fa-plane text-primary me-2"></i>
+                                            Airport transfers
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="itinerary mb-4">
+                            <h3>Itinerary</h3>
+                            <div class="accordion" id="itineraryAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="day1Heading">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#day1Collapse" aria-expanded="true" aria-controls="day1Collapse">
+                                            Day 1: Arrival and Welcome Dinner
+                                        </button>
+                                    </h2>
+                                    <div id="day1Collapse" class="accordion-collapse collapse show" aria-labelledby="day1Heading" data-bs-parent="#itineraryAccordion">
+                                        <div class="accordion-body">
+                                            <p>Arrive at your destination and check into your hotel. Meet your tour guide and fellow travelers during a welcome dinner at a local restaurant.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="day2Heading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#day2Collapse" aria-expanded="false" aria-controls="day2Collapse">
+                                            Day 2: City Tour and Local Landmarks
+                                        </button>
+                                    </h2>
+                                    <div id="day2Collapse" class="accordion-collapse collapse" aria-labelledby="day2Heading" data-bs-parent="#itineraryAccordion">
+                                        <div class="accordion-body">
+                                            <p>Explore the city with a guided tour, visiting important landmarks and learning about the local history and culture.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="day3Heading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#day3Collapse" aria-expanded="false" aria-controls="day3Collapse">
+                                            Day 3: Nature Excursion
+                                        </button>
+                                    </h2>
+                                    <div id="day3Collapse" class="accordion-collapse collapse" aria-labelledby="day3Heading" data-bs-parent="#itineraryAccordion">
+                                        <div class="accordion-body">
+                                            <p>Head out of the city to explore the natural beauty of the region with hiking, sightseeing, and outdoor activities.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="finalDayHeading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#finalDayCollapse" aria-expanded="false" aria-controls="finalDayCollapse">
+                                            Final Day: Departure
+                                        </button>
+                                    </h2>
+                                    <div id="finalDayCollapse" class="accordion-collapse collapse" aria-labelledby="finalDayHeading" data-bs-parent="#itineraryAccordion">
+                                        <div class="accordion-body">
+                                            <p>Enjoy a final breakfast at your hotel before checking out. Transfer to the airport for your departure.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="inclusions-exclusions">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3>What's Included</h3>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> Accommodation</li>
+                                        <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> Daily breakfast</li>
+                                        <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> Welcome dinner</li>
+                                        <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> Airport transfers</li>
+                                        <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> Guided tours</li>
+                                        <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> Entrance fees</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3>What's Not Included</h3>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i> Flights</li>
+                                        <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i> Travel insurance</li>
+                                        <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i> Lunch and dinner (except welcome dinner)</li>
+                                        <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i> Personal expenses</li>
+                                        <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i> Tips and gratuities</li>
+                                        <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i> Optional activities</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <!-- Price Card -->
+                <div class="card shadow-sm mb-4 booking-card sticky-top">
+                    <div class="card-body">
+                        <div class="price-container mb-3">
+                            <span class="text-muted text-decoration-line-through" 
+                                  th:if="${package.discountPercentage != null && package.discountPercentage > 0}">
+                                $<span th:text="${package.price}">1299</span>
+                            </span>
+                            <span class="price fs-3 fw-bold text-primary">
+                                $<span th:text="${package.discountedPrice}">1099</span>
+                            </span>
+                            <span class="text-muted">/ person</span>
+                            
+                            <span class="badge bg-danger ms-2" 
+                                  th:if="${package.discountPercentage != null && package.discountPercentage > 0}"
+                                  th:text="${package.discountPercentage} + '% OFF'">15% OFF</span>
+                        </div>
+                        
+                        <div class="availability-info mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><i class="fas fa-calendar-alt text-primary"></i> Start Date</span>
+                                <span th:text="${#temporals.format(package.startDate, 'MMM d, yyyy')}">Jan 15, 2023</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><i class="fas fa-calendar-alt text-primary"></i> End Date</span>
+                                <span th:text="${#temporals.format(package.endDate, 'MMM d, yyyy')}">Jun 30, 2023</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><i class="fas fa-users text-primary"></i> Group Size</span>
+                                <span th:text="'Max ' + ${package.maxGroupSize} + ' people'">Max 15 people</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Booking Form -->
+                        <h5 class="card-title">Book This Package</h5>
+                        <form id="bookingForm" method="post" th:action="@{/bookings/create}" class="needs-validation" novalidate>
+                            <input type="hidden" name="packageId" th:value="${package.id}">
+                            <input type="hidden" name="packageName" th:value="${package.name}">
+                            <input type="hidden" name="destinationName" th:value="${package.destinationName}">
+                            <input type="hidden" name="packagePrice" th:value="${package.discountedPrice}">
+                            
+                            <div class="mb-3">
+                                <label for="travelDate" class="form-label">Travel Date <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control flatpickr-date" id="travelDate" name="travelDate" 
+                                       th:attr="data-min-date=${package.startDate}, data-max-date=${package.endDate}"
+                                       placeholder="Select your travel date" required>
+                                <div class="invalid-feedback">Please select a travel date.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="numberOfPeople" class="form-label">Number of People <span class="text-danger">*</span></label>
+                                <select class="form-select" id="numberOfPeople" name="numberOfPeople" required>
+                                    <option value="">Select number of people</option>
+                                    <option th:each="i : ${#numbers.sequence(1, package.maxGroupSize)}" th:value="${i}" th:text="${i}"></option>
+                                </select>
+                                <div class="invalid-feedback">Please select the number of people.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="contactName" class="form-label">Your Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="contactName" name="contactName" placeholder="Enter your full name" required>
+                                <div class="invalid-feedback">Please enter your name.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="contactEmail" class="form-label">Email Address <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="contactEmail" name="contactEmail" placeholder="Enter your email" required>
+                                <div class="invalid-feedback">Please enter a valid email address.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="contactPhone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="contactPhone" name="contactPhone" placeholder="Enter your phone number" required>
+                                <div class="invalid-feedback">Please enter your phone number.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="specialRequests" class="form-label">Special Requests</label>
+                                <textarea class="form-control" id="specialRequests" name="specialRequests" rows="3" placeholder="Any special requests or dietary requirements?"></textarea>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Book Now</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Packages -->
+<section class="related-packages-section py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">You May Also Like</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <!-- Sample Related Packages - In a real implementation, these would be dynamically loaded -->
+            <div class="col" data-aos="fade-up">
+                <div class="card h-100 package-card shadow-sm">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077" class="card-img-top package-img" alt="Related Package 1">
+                        <div class="discount-badge">
+                            <span class="badge bg-danger">10% OFF</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Culture Tour in Rome</h5>
+                        <p class="card-text description">Explore the ancient ruins and rich history of the Eternal City.</p>
+                        <div class="package-info">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><i class="fas fa-calendar-alt text-primary"></i> 6 days</span>
+                                <span class="package-type">
+                                    <span class="badge bg-info">CULTURAL</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="price-container">
+                                <span class="price fw-bold">$1,199</span>
+                                <span class="text-muted">/ person</span>
+                            </div>
+                            <a th:href="@{/tour-packages/details/1}" class="btn btn-sm btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100 package-card shadow-sm">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21" class="card-img-top package-img" alt="Related Package 2">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Beach Holiday in Cancun</h5>
+                        <p class="card-text description">Relax on pristine beaches with crystal clear waters and luxury resorts.</p>
+                        <div class="package-info">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><i class="fas fa-calendar-alt text-primary"></i> 7 days</span>
+                                <span class="package-type">
+                                    <span class="badge bg-info">BEACH</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="price-container">
+                                <span class="price fw-bold">$1,399</span>
+                                <span class="text-muted">/ person</span>
+                            </div>
+                            <a th:href="@{/tour-packages/details/2}" class="btn btn-sm btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col" data-aos="fade-up" data-aos-delay="200">
+                <div class="card h-100 package-card shadow-sm">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2" class="card-img-top package-img" alt="Related Package 3">
+                        <div class="discount-badge">
+                            <span class="badge bg-danger">15% OFF</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Safari Adventure in Kenya</h5>
+                        <p class="card-text description">Experience the thrill of wildlife safaris in the heart of Africa.</p>
+                        <div class="package-info">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><i class="fas fa-calendar-alt text-primary"></i> 8 days</span>
+                                <span class="package-type">
+                                    <span class="badge bg-info">ADVENTURE</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="price-container">
+                                <span class="text-muted text-decoration-line-through">$1,799</span>
+                                <span class="price fw-bold">$1,529</span>
+                                <span class="text-muted">/ person</span>
+                            </div>
+                            <a th:href="@{/tour-packages/details/3}" class="btn btn-sm btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section th:replace="~{fragments/newsletter :: newsletter}"></section>
+
+<!-- Footer -->
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+<!-- Bootstrap & JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script th:src="@{/static/js/main.js}"></script>
+<script>
+    // Initialize AOS
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+    
+    // Initialize date picker
+    document.addEventListener('DOMContentLoaded', function() {
+        const travelDateInput = document.getElementById('travelDate');
+        if (travelDateInput) {
+            const minDate = travelDateInput.getAttribute('data-min-date');
+            const maxDate = travelDateInput.getAttribute('data-max-date');
+            
+            flatpickr(travelDateInput, {
+                minDate: minDate,
+                maxDate: maxDate,
+                dateFormat: "Y-m-d"
+            });
+        }
+        
+        // Form validation
+        const form = document.getElementById('bookingForm');
+        if (form) {
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            });
+        }
+    });
+</script>
+</body>
+</html> 

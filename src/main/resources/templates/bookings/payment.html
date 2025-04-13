@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | TravelLust</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+</head>
+<body>
+
+<!-- Header -->
+<header th:replace="fragments/header :: header"></header>
+
+<!-- Breadcrumb -->
+<div class="container py-2">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/tours}">Tours</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/bookings/form}">Book Tour</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Payment</li>
+        </ol>
+    </nav>
+</div>
+
+<!-- Payment Section -->
+<section class="payment-section py-5">
+    <div class="container">
+        <!-- Progress Bar -->
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="booking-progress">
+                    <div class="progress" style="height: 5px;">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%;" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <div class="progress-step completed">
+                            <span class="step-icon"><i class="fas fa-clipboard-list"></i></span>
+                            <span class="step-text">Booking Details</span>
+                        </div>
+                        <div class="progress-step active">
+                            <span class="step-icon"><i class="fas fa-credit-card"></i></span>
+                            <span class="step-text">Payment</span>
+                        </div>
+                        <div class="progress-step">
+                            <span class="step-icon"><i class="fas fa-check-circle"></i></span>
+                            <span class="step-text">Confirmation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Alert for errors -->
+        <div class="row" th:if="${error != null}">
+            <div class="col-12">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <span th:text="${error}">Error message here</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Payment Form -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm mb-4" data-aos="fade-up">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="card-title mb-0">
+                            <i class="fas fa-credit-card me-2"></i>Payment Details
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/bookings/process-payment}" method="post" th:object="${paymentForm}" class="needs-validation" novalidate>
+                            <input type="hidden" th:field="*{bookingId}" />
+                            
+                            <!-- Payment Methods -->
+                            <h5 class="border-bottom pb-2 mb-4">Select Payment Method</h5>
+                            <div class="row g-3 mb-4">
+                                <div class="col-12">
+                                    <div class="payment-methods">
+                                        <div class="form-check form-check-inline payment-method-option">
+                                            <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="creditCard" checked>
+                                            <label class="form-check-label payment-label" for="creditCard">
+                                                <i class="fab fa-cc-visa fa-2x me-2"></i>
+                                                <i class="fab fa-cc-mastercard fa-2x me-2"></i>
+                                                <i class="fab fa-cc-amex fa-2x me-2"></i>
+                                                <span>Credit/Debit Card</span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-check form-check-inline payment-method-option">
+                                            <input class="form-check-input" type="radio" name="paymentMethod" id="paypal" value="paypal">
+                                            <label class="form-check-label payment-label" for="paypal">
+                                                <i class="fab fa-paypal fa-2x me-2"></i>
+                                                <span>PayPal</span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-check form-check-inline payment-method-option">
+                                            <input class="form-check-input" type="radio" name="paymentMethod" id="applePay" value="applePay">
+                                            <label class="form-check-label payment-label" for="applePay">
+                                                <i class="fab fa-apple-pay fa-2x me-2"></i>
+                                                <span>Apple Pay</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Credit Card Details (Default Option) -->
+                            <div id="creditCardDetails">
+                                <h5 class="border-bottom pb-2 mb-4">Credit Card Information</h5>
+                                <div class="row g-3 mb-4">
+                                    <div class="col-12">
+                                        <label for="cardholderName" class="form-label">Cardholder Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="cardholderName" th:field="*{cardholderName}" placeholder="Name as it appears on card" required>
+                                        <div class="invalid-feedback">
+                                            Please enter the cardholder name.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-12">
+                                        <label for="cardNumber" class="form-label">Card Number <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
+                                            <input type="text" class="form-control" id="cardNumber" th:field="*{cardNumber}" placeholder="1234 5678 9012 3456" required>
+                                            <div class="invalid-feedback">
+                                                Please enter a valid card number.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <label for="expiryDate" class="form-label">Expiry Date <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="expiryDate" th:field="*{expiryDate}" placeholder="MM/YY" required>
+                                        <div class="invalid-feedback">
+                                            Please enter the card's expiry date.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <label for="cvv" class="form-label">CVV <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="cvv" th:field="*{cvv}" placeholder="123" maxlength="4" required>
+                                            <span class="input-group-text" data-bs-toggle="tooltip" data-bs-placement="right" 
+                                                  title="The 3 or 4 digit security code on the back of your card">
+                                                <i class="fas fa-question-circle"></i>
+                                            </span>
+                                            <div class="invalid-feedback">
+                                                Please enter the security code.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Billing Address -->
+                            <h5 class="border-bottom pb-2 mb-4">Billing Address</h5>
+                            <div class="row g-3 mb-4">
+                                <div class="col-12">
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="sameAsContact" name="sameAsContact" checked>
+                                        <label class="form-check-label" for="sameAsContact">
+                                            Same as contact information
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div id="billingAddressFields" style="display: none;">
+                                    <div class="col-12">
+                                        <label for="billingName" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="billingName" th:field="*{billingName}">
+                                    </div>
+                                    
+                                    <div class="col-12">
+                                        <label for="billingAddress" class="form-label">Street Address <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="billingAddress" th:field="*{billingAddress}">
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="billingCity" class="form-label">City <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="billingCity" th:field="*{billingCity}">
+                                        </div>
+                                        
+                                        <div class="col-md-3">
+                                            <label for="billingState" class="form-label">State <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="billingState" th:field="*{billingState}">
+                                        </div>
+                                        
+                                        <div class="col-md-3">
+                                            <label for="billingZip" class="form-label">Zip/Postal Code <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="billingZip" th:field="*{billingZip}">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-12">
+                                        <label for="billingCountry" class="form-label">Country <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="billingCountry" th:field="*{billingCountry}">
+                                            <option value="">Select Country</option>
+                                            <option value="US">United States</option>
+                                            <option value="CA">Canada</option>
+                                            <option value="UK">United Kingdom</option>
+                                            <!-- More countries would be added here -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Additional Options -->
+                            <h5 class="border-bottom pb-2 mb-4">Travel Protection</h5>
+                            <div class="row g-3 mb-4">
+                                <div class="col-12">
+                                    <div class="card border-primary mb-3">
+                                        <div class="card-header bg-primary text-white">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="travelInsurance" th:field="*{addTravelInsurance}">
+                                                <label class="form-check-label fw-bold" for="travelInsurance">
+                                                    Add Travel Insurance (+$49)
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="card-text">Protect your trip with comprehensive travel insurance that includes:</p>
+                                            <ul>
+                                                <li>Trip cancellation & interruption coverage</li>
+                                                <li>Emergency medical expenses</li>
+                                                <li>Baggage loss/delay protection</li>
+                                                <li>Travel delay coverage</li>
+                                                <li>24/7 emergency assistance</li>
+                                            </ul>
+                                            <p class="card-text"><small class="text-muted">Terms and conditions apply. <a href="#" data-bs-toggle="modal" data-bs-target="#insuranceModal">Learn more</a>.</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Submit Buttons -->
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                <a th:href="@{/bookings/form}" class="btn btn-outline-secondary me-md-2">
+                                    <i class="fas fa-arrow-left me-2"></i>Back
+                                </a>
+                                <button type="submit" class="btn btn-primary">
+                                    Complete Payment <i class="fas fa-arrow-right ms-2"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Summary -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm mb-4 sticky-top" style="top: 20px; z-index: 999;" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-header bg-light">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-receipt me-2"></i>Order Summary
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 th:text="${booking.packageName}">Amazing Tour Package</h5>
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <span th:text="${booking.destinationName}">Destination</span>
+                        </p>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Travelers:</span>
+                            <span th:text="${booking.numberOfPeople}">2</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Travel Date:</span>
+                            <span th:text="${#dates.format(booking.travelDate, 'MMM dd, yyyy')}">Jun 15, 2023</span>
+                        </div>
+                        
+                        <hr>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Base Price per person:</span>
+                            <span th:text="'$' + ${booking.packagePrice}">$999</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Travelers:</span>
+                            <span th:text="${booking.numberOfPeople} + ' × $' + ${booking.packagePrice}">2 × $999</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal:</span>
+                            <span th:text="'$' + ${booking.packagePrice * booking.numberOfPeople}">$1,998</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-2" th:if="${booking.discount > 0}">
+                            <span>Discount:</span>
+                            <span class="text-success" th:text="'-$' + ${booking.discount}">-$100</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Tax:</span>
+                            <span th:text="'$' + ${booking.tax}">$150</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-2" id="insuranceRow" style="display: none;">
+                            <span>Travel Insurance:</span>
+                            <span>$49</span>
+                        </div>
+                        
+                        <hr>
+                        
+                        <div class="d-flex justify-content-between fw-bold">
+                            <span>Total:</span>
+                            <span id="totalAmount" th:data-base-total="${booking.totalAmount}" th:text="'$' + ${booking.totalAmount}">$2,048</span>
+                        </div>
+                        
+                        <hr>
+                        
+                        <div class="payment-security mt-3">
+                            <p class="small text-center mb-2">SECURE PAYMENT</p>
+                            <div class="d-flex justify-content-center payment-icons">
+                                <i class="fab fa-cc-visa fa-2x mx-1"></i>
+                                <i class="fab fa-cc-mastercard fa-2x mx-1"></i>
+                                <i class="fab fa-cc-amex fa-2x mx-1"></i>
+                                <i class="fab fa-cc-discover fa-2x mx-1"></i>
+                                <i class="fab fa-paypal fa-2x mx-1"></i>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center mt-2">
+                                <i class="fas fa-lock text-success me-1"></i>
+                                <span class="small">Secure SSL Encryption</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Insurance Info Modal -->
+<div class="modal fade" id="insuranceModal" tabindex="-1" aria-labelledby="insuranceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="insuranceModalLabel">Travel Insurance Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Comprehensive Travel Protection</h6>
+                <p>Our travel insurance provides comprehensive coverage for your peace of mind. For just $49 per booking, you'll receive protection for:</p>
+                
+                <h6>Trip Cancellation & Interruption</h6>
+                <p>Get reimbursed up to 100% of the cost of your trip if you need to cancel or cut your journey short due to covered reasons including:</p>
+                <ul>
+                    <li>Illness, injury, or death of you, a traveling companion, or family member</li>
+                    <li>Natural disasters affecting your destination</li>
+                    <li>Jury duty or legal obligations</li>
+                    <li>Employment termination</li>
+                    <li>Terrorism at your destination</li>
+                </ul>
+                
+                <h6>Medical Coverage</h6>
+                <ul>
+                    <li>Emergency medical expenses: Up to $50,000</li>
+                    <li>Emergency evacuation: Up to $250,000</li>
+                    <li>24/7 emergency assistance services</li>
+                </ul>
+                
+                <h6>Baggage Protection</h6>
+                <ul>
+                    <li>Lost, stolen, or damaged baggage: Up to $1,000</li>
+                    <li>Baggage delay (over 12 hours): Up to $300</li>
+                </ul>
+                
+                <h6>Other Benefits</h6>
+                <ul>
+                    <li>Travel delay: Up to $150 per day (maximum $600)</li>
+                    <li>Missed connection: Up to $500</li>
+                    <li>Rental car damage: Up to $35,000</li>
+                </ul>
+                
+                <p><small>This is a brief summary of benefits. Terms, conditions, and exclusions apply. Please refer to the full policy documentation for complete details.</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="addInsuranceBtn" data-bs-dismiss="modal">Add Insurance</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer th:replace="fragments/footer :: footer"></footer>
+
+<!-- Bootstrap & JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script th:src="@{/static/js/main.js}"></script>
+
+<script>
+    // Initialize AOS
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Toggle payment methods
+        const creditCardRadio = document.getElementById('creditCard');
+        const paypalRadio = document.getElementById('paypal');
+        const applePayRadio = document.getElementById('applePay');
+        const creditCardDetails = document.getElementById('creditCardDetails');
+        
+        function togglePaymentMethod() {
+            if (creditCardRadio.checked) {
+                creditCardDetails.style.display = 'block';
+            } else {
+                creditCardDetails.style.display = 'none';
+            }
+        }
+        
+        if (creditCardRadio) creditCardRadio.addEventListener('change', togglePaymentMethod);
+        if (paypalRadio) paypalRadio.addEventListener('change', togglePaymentMethod);
+        if (applePayRadio) applePayRadio.addEventListener('change', togglePaymentMethod);
+        
+        // Toggle billing address
+        const sameAsContactCheckbox = document.getElementById('sameAsContact');
+        const billingAddressFields = document.getElementById('billingAddressFields');
+        
+        if (sameAsContactCheckbox && billingAddressFields) {
+            sameAsContactCheckbox.addEventListener('change', function() {
+                billingAddressFields.style.display = this.checked ? 'none' : 'block';
+            });
+        }
+        
+        // Form validation
+        const forms = document.querySelectorAll('.needs-validation');
+        
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                
+                form.classList.add('was-validated');
+            }, false);
+        });
+        
+        // Initialize tooltips
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+        
+        // Handle insurance checkbox
+        const travelInsurance = document.getElementById('travelInsurance');
+        const insuranceRow = document.getElementById('insuranceRow');
+        const totalAmount = document.getElementById('totalAmount');
+        const baseTotal = parseFloat(totalAmount.getAttribute('data-base-total') || 0);
+        
+        if (travelInsurance && insuranceRow && totalAmount) {
+            travelInsurance.addEventListener('change', function() {
+                if (this.checked) {
+                    insuranceRow.style.display = 'flex';
+                    totalAmount.textContent = '$' + (baseTotal + 49).toFixed(2);
+                } else {
+                    insuranceRow.style.display = 'none';
+                    totalAmount.textContent = '$' + baseTotal.toFixed(2);
+                }
+            });
+        }
+        
+        // Add insurance from modal
+        const addInsuranceBtn = document.getElementById('addInsuranceBtn');
+        if (addInsuranceBtn && travelInsurance) {
+            addInsuranceBtn.addEventListener('click', function() {
+                travelInsurance.checked = true;
+                
+                // Trigger change event
+                const event = new Event('change');
+                travelInsurance.dispatchEvent(event);
+            });
+        }
+        
+        // Format credit card number
+        const cardNumberInput = document.getElementById('cardNumber');
+        if (cardNumberInput) {
+            cardNumberInput.addEventListener('input', function(e) {
+                // Remove all non-digits
+                let value = this.value.replace(/\D/g, '');
+                
+                // Add space after every 4 digits
+                if (value.length > 0) {
+                    value = value.match(/.{1,4}/g).join(' ');
+                }
+                
+                // Update the input value
+                this.value = value;
+            });
+        }
+        
+        // Format expiry date
+        const expiryDateInput = document.getElementById('expiryDate');
+        if (expiryDateInput) {
+            expiryDateInput.addEventListener('input', function(e) {
+                // Remove all non-digits
+                let value = this.value.replace(/\D/g, '');
+                
+                // Add slash after 2 digits
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                
+                // Update the input value
+                this.value = value;
+            });
+        }
+    });
+</script>
+
+<style>
+    /* Progress Steps */
+    .booking-progress .progress-step {
+        text-align: center;
+        flex: 1;
+    }
+    
+    .booking-progress .step-icon {
+        display: block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 50%;
+        background-color: #e9ecef;
+        color: #6c757d;
+        margin: 0 auto 5px;
+    }
+    
+    .booking-progress .progress-step.active .step-icon {
+        background-color: var(--bs-primary);
+        color: white;
+    }
+    
+    .booking-progress .progress-step.completed .step-icon {
+        background-color: var(--bs-success);
+        color: white;
+    }
+    
+    .booking-progress .step-text {
+        font-size: 0.85rem;
+        display: block;
+    }
+    
+    /* Payment Method Styles */
+    .payment-method-option {
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+        width: 230px;
+        transition: all 0.2s ease;
+    }
+    
+    .payment-method-option:hover {
+        border-color: var(--bs-primary);
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+    
+    .payment-method-option .form-check-input {
+        float: none;
+        margin-right: 0.5rem;
+    }
+    
+    .payment-method-option .payment-label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+    
+    .payment-icons i {
+        color: #6c757d;
+    }
+    
+    @media (max-width: 576px) {
+        .booking-progress .step-text {
+            font-size: 0.7rem;
+        }
+        
+        .payment-method-option {
+            width: 100%;
+            margin-right: 0;
+        }
+    }
+</style>
+</body>
+</html> 

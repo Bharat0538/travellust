@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
     <header th:fragment="header">
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" th:href="@{/}">
                     <span class="brand-name">TravelLust</span>
@@ -12,7 +12,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto align-items-center">
                         <li class="nav-item">
                             <a class="nav-link" th:classappend="${activeTab == 'home' ? 'active' : ''}" th:href="@{/}">Home</a>
                         </li>
@@ -20,7 +20,7 @@
                             <a class="nav-link" th:classappend="${activeTab == 'destinations' ? 'active' : ''}" th:href="@{/destinations}">Destinations</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:classappend="${activeTab == 'packages' ? 'active' : ''}" th:href="@{/packages}">Tour Packages</a>
+                            <a class="nav-link" th:classappend="${activeTab == 'packages' ? 'active' : ''}" th:href="@{/tour-packages}">Tour Packages</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:classappend="${activeTab == 'about' ? 'active' : ''}" th:href="@{/about}">About Us</a>
@@ -33,18 +33,18 @@
                         </li>
                         
                         <!-- Show when user is not authenticated -->
-                        <li class="nav-item login-button ms-2" sec:authorize="!isAuthenticated()">
-                            <a class="btn btn-outline-primary" th:classappend="${activeTab == 'login' ? 'active' : ''}" th:href="@{/login}">Login</a>
+                        <li class="nav-item ms-lg-3" sec:authorize="!isAuthenticated()">
+                            <a class="btn btn-primary btn-rounded px-4" th:classappend="${activeTab == 'login' ? 'active' : ''}" th:href="@{/login}">Login</a>
                         </li>
                         
                         <!-- Show when user is authenticated -->
-                        <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                        <li class="nav-item dropdown ms-lg-3" sec:authorize="isAuthenticated()">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="me-1" sec:authentication="name"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">My Profile</a></li>
-                                <li><a class="dropdown-item" href="#">My Bookings</a></li>
+                                <li><a class="dropdown-item" th:href="@{/account}">My Account</a></li>
+                                <li><a class="dropdown-item" th:href="@{/bookings}">My Bookings</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form th:action="@{/logout}" method="post" style="display: inline;">
